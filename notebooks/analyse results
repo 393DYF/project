@@ -1,0 +1,27 @@
+%load_ext autoreload
+%autoreload 2
+%matplotlib inline
+
+from warnings import filterwarnings
+filterwarnings('ignore')
+import sys
+sys.path.append('../')
+
+from utils.analyse_results import *
+dirname = '../tests/linkage/'
+linkage_gain = load_results_linkage(dirname)
+models = ['SanitiserNHSk10', 'BayesianNet', 'PrivBayesEps1.0']
+fig = plt_per_target_pg(linkage_gain, models, resFilter=('FeatureSet', 'Naive'))
+models = ['SanitiserNHSk10', 'BayesianNet', 'PrivBayesEps1.0']
+fig = plt_per_target_pg(linkage_gain, models, resFilter=('FeatureSet', 'Correlations'))
+dirname = '../tests/inference/'
+dpath = '../data/texas'
+inference_gain = load_results_inference(dirname, dpath)
+models = ['SanitiserNHSk10', 'BayesianNet', 'PrivBayesEps1.0']
+fig = plt_per_target_pg(inference_gain, models, resFilter=('SensitiveAttribute', 'RACE'))
+fig = plt_per_target_pg(inference_gain, models, resFilter=('SensitiveAttribute', 'LengthOfStay'))
+dirname = '../tests/utility/'
+utility_record, utility_agg = load_results_utility(dirname)
+labelVar = 'RiskMortality'
+models = ['Raw','SanitiserNHSk10', 'BayesianNet', 'PrivBayesEps1.0']
+fig = plt_avg_accuracy(utility_agg, models)
