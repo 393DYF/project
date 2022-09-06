@@ -1,3 +1,4 @@
+#These codes are referenced from https://github.com/spring-epfl/synthetic_data_release.git.
 # Privacy evaluation framework for synthetic data publishing
 A practical framework to evaluate the privacy-utility tradeoff of synthetic data publishing 
 
